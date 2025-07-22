@@ -41,11 +41,23 @@ const PDFQAPage = () => {
   );
 
   // Upload mutation
-  const uploadMutation = useMutation(pdfQaService.uploadDocument, {
+  const uploadMutation = useMutation(pdfQaService.uploadPdf, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('pdf-documents');
       toast.success('Document uploaded and processed successfully!');
-      setSelectedDocument(data.document);
+      // Handle backend response structure
+      if (data.document_id) {
+        // Create a document object from the upload response
+        const documentObj = {
+          _id: data.document_id,
+          filename: data.filename,
+          num_chunks: data.num_chunks,
+          text_preview: data.text_preview
+        };
+        setSelectedDocument(documentObj);
+      } else if (data.document) {
+        setSelectedDocument(data.document);
+      }
     },
     onError: (error) => {
       toast.error(error.response?.data?.error || 'Failed to upload document');
@@ -81,10 +93,8 @@ const PDFQAPage = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    uploadMutation.mutate(formData);
+    // Pass the file directly to the mutation, not FormData
+    uploadMutation.mutate(file);
   };
 
   // Handle drag and drop
@@ -167,7 +177,7 @@ const PDFQAPage = () => {
     if (!selectedDocument) return;
 
     try {
-      const response = await pdfQaService.generateQuiz(selectedDocument._id);
+      const response = await pdfQaService.generateQuestions(selectedDocument._id);
       
       const quizMessage = {
         type: 'quiz',

@@ -74,7 +74,7 @@ const PDFQAPage = () => {
   );
 
   // Upload mutation
-  const uploadMutation = useMutation(pdfQaService.uploadDocument, {
+  const uploadMutation = useMutation(pdfQaService.uploadPdf, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('pdf-documents');
       toast.success('Document uploaded and processed successfully!');
