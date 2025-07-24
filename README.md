@@ -9,6 +9,7 @@ A modern React-based frontend application for the AI Productivity Suite designed
 - **🎯 Habit Tracker** - Monitor daily habits with visual progress tracking
 - **📝 Smart Notes** - AI-powered note summarization with multiple styles
 - **📚 PDF Q&A** - Upload PDFs and ask intelligent questions using RAG technology
+- **📄 Document Summarizer** - AI-powered PDF summarization for exam preparation with multiple summary types
 - **⏱️ Pomodoro Timer** - Customizable focus sessions with break management
 - **🔐 Authentication** - Secure user login and registration
 - **📱 Responsive Design** - Mobile-friendly interface with Tailwind CSS

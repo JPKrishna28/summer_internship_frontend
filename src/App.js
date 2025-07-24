@@ -13,6 +13,8 @@ import HabitsPage from './pages/HabitsPage';
 import NotesPage from './pages/NotesPage';
 import PomodoroPage from './pages/PomodoroPage';
 import PDFQAPage from './pages/PDFQAPage';
+import DocumentSummarizerPage from './pages/DocumentSummarizerPage';
+import PodcastGeneratorPage from './pages/PodcastGeneratorPage';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -59,6 +61,8 @@ function AppContent() {
         <Route path="notes" element={<NotesPage />} />
         <Route path="pomodoro" element={<PomodoroPage />} />
         <Route path="pdf-qa" element={<PDFQAPage />} />
+        <Route path="document-summarizer" element={<DocumentSummarizerPage />} />
+        <Route path="podcast-generator" element={<PodcastGeneratorPage />} />
       </Route>
     </Routes>
   );

@@ -190,5 +190,77 @@ export const pdfQaService = {
       ...options
     });
     return response.data;
+  },
+
+  async summarizeDocument(documentId, options = {}) {
+    const response = await api.post(`/pdf-qa/summarize/${documentId}`, options);
+    return response.data;
+  },
+
+  async getSummaries(filters = {}) {
+    const params = new URLSearchParams();
+    if (filters.document_id) params.append('document_id', filters.document_id);
+    if (filters.type) params.append('type', filters.type);
+    
+    const response = await api.get(`/pdf-qa/summaries?${params}`);
+    return response.data.summaries;
+  },
+
+  async deleteSummary(summaryId) {
+    const response = await api.delete(`/pdf-qa/summaries/${summaryId}`);
+    return response.data;
+  },
+
+  // Podcast Generation Functions
+  async generatePodcast(documentId, options = {}) {
+    const response = await api.post(`/tts/generate-podcast/${documentId}`, options);
+    return response.data;
+  },
+
+  async getPodcasts(filters = {}) {
+    const params = new URLSearchParams();
+    if (filters.document_id) params.append('document_id', filters.document_id);
+    if (filters.type) params.append('type', filters.type);
+    
+    const response = await api.get(`/tts/podcasts?${params}`);
+    return response.data;
+  },
+
+  async downloadPodcastAudio(podcastId) {
+    const response = await api.get(`/tts/podcasts/${podcastId}/audio`, {
+      responseType: 'blob'
+    });
+    return response.data;
+  },
+
+  async getPodcastAudioBlob(podcastId) {
+    // Get audio blob for playback
+    const response = await api.get(`/tts/podcasts/${podcastId}/audio`, {
+      responseType: 'blob'
+    });
+    return response.data;
+  },
+
+  async deletePodcast(podcastId) {
+    const response = await api.delete(`/tts/podcasts/${podcastId}`);
+    return response.data;
+  }
+};
+
+// TTS Service for general text-to-speech functionality
+export const ttsService = {
+  async convertTextToSpeech(text, options = {}) {
+    const response = await api.post('/tts/text-to-speech', {
+      text,
+      ...options
+    }, {
+      responseType: 'blob'
+    });
+    return response.data;
+  },
+
+  async getAvailableVoices() {
+    const response = await api.get('/tts/voices');
+    return response.data;
   }
 };

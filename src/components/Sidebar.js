@@ -8,6 +8,7 @@ import {
   Timer, 
   FileText, 
   Brain,
+  Mic,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -22,6 +23,8 @@ const navigation = [
   { name: 'Notes', href: '/notes', icon: BookOpen },
   { name: 'Pomodoro', href: '/pomodoro', icon: Timer },
   { name: 'PDF Q&A', href: '/pdf-qa', icon: FileText },
+  { name: 'Document Summarizer', href: '/document-summarizer', icon: Brain },
+  { name: 'Podcast Generator', href: '/podcast-generator', icon: Mic },
 ];
 
 const Sidebar = () => {
